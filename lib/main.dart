@@ -107,11 +107,13 @@ class MyHomePage extends StatelessWidget {
               child: Column(
                 children: <Widget>[
                   TextField(
+                    onChanged: (newValue) => title = newValue,
                     decoration: InputDecoration(
                       labelText: 'Titulo',
                     ),
                   ),
                   TextField(
+                    onChanged: (newValue) => value = newValue,
                     decoration: InputDecoration(
                       labelText: 'Valor (R\$)',
                     ),
@@ -122,7 +124,10 @@ class MyHomePage extends StatelessWidget {
                       FlatButton(
                         child: Text('Nova Transacao'),
                         textColor: Colors.purple,
-                        onPressed: () {},
+                        onPressed: () {
+                          print(title);
+                          print(value);
+                        },
                       ),
                     ],
                   )
