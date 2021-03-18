@@ -16,6 +16,9 @@ class ExpensesApp extends StatelessWidget {
 }
 
 class MyHomePage extends StatelessWidget {
+  String title;
+  String value;
+
   final _trasctions = [
     Transaction(
       id: 't1',
