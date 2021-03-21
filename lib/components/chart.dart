@@ -33,7 +33,7 @@ class Chart extends StatelessWidget {
           'value': totalSum,
         };
       },
-    );
+    ).reversed.toList();
   }
 
   double get _weekTotalValue {
@@ -55,6 +55,7 @@ class Chart extends StatelessWidget {
           children: groupedTrasactions.map((tr) {
             return Flexible(
               fit: FlexFit.tight,
+              flex: 5,
               child: ChartBar(
                 label: tr['day'],
                 value: tr['value'],

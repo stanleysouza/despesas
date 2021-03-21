@@ -27,6 +27,7 @@ class ExpensesApp extends StatelessWidget {
                 fontFamily: 'Pangolin',
                 fontSize: 19,
                 fontWeight: FontWeight.bold,
+                color: Colors.green,
               ),
               subtitle1: TextStyle(
                 fontFamily: 'Pangolin',

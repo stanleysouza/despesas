@@ -36,48 +36,34 @@ class TransactionList extends StatelessWidget {
               itemBuilder: (ctx, index) {
                 final tr = transactions[index];
                 return Card(
-                  child: Row(
-                    children: <Widget>[
-                      Container(
-                        width: 100,
-                        margin: EdgeInsets.symmetric(
-                          horizontal: 15,
+                  elevation: 5,
+                  margin: EdgeInsets.symmetric(
+                    horizontal: 1,
+                    vertical: 2,
+                  ),
+                  child: ListTile(
+                    leading: Container(
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 1,
                           vertical: 10,
                         ),
-                        decoration: BoxDecoration(
-                            // border: Border.all(
-                            //   color: Theme.of(context).primaryColor,
-                            //   width: 2,
-                            // ),
-                            ),
-                        padding: EdgeInsets.all(10),
                         child: FittedBox(
                           child: Text(
-                            'R\$ ${tr.value.toStringAsFixed(2)}',
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: 20,
-                              color: Theme.of(context).primaryColor,
-                            ),
+                            'R\$${tr.value}',
+                            style: Theme.of(context).textTheme.bodyText1,
                           ),
                         ),
                       ),
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: <Widget>[
-                          Text(
-                            tr.title,
-                            style: Theme.of(context).textTheme.subtitle1,
-                          ),
-                          Text(
-                            DateFormat('d/MM/y').format(tr.date),
-                            style: TextStyle(
-                              color: Colors.grey,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ],
+                    ),
+                    title: Text(
+                      tr.title,
+                      style: Theme.of(context).textTheme.subtitle1,
+                    ),
+                    subtitle: Text(
+                      DateFormat('d mm y').format(tr.date),
+                    ),
+                    trailing: Text('excluir'),
                   ),
                 );
               },
