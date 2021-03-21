@@ -1,6 +1,8 @@
+import 'package:despesas/components/chart_bar.dart';
 import 'package:despesas/models/trasaction.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'chart_bar.dart';
 
 class Chart extends StatelessWidget {
   final List<Transaction> recentTransaction;
@@ -28,7 +30,7 @@ class Chart extends StatelessWidget {
 
         return {
           'day': DateFormat.E().format(weekday)[0],
-          'value': 9.99,
+          'value': totalSum,
         };
       },
     );
@@ -36,13 +38,18 @@ class Chart extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    groupedTrasactions;
     return Card(
       elevation: 6,
       margin: EdgeInsets.all(20),
       child: Row(
-        children: [
-          Column(),
-        ],
+        children: groupedTrasactions.map((tr) {
+          return ChartBar(
+            label: tr['day'],
+            value: tr['value'],
+            percentage: 0.6,
+          );
+        }).toList(),
       ),
     );
   }

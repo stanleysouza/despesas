@@ -1,3 +1,4 @@
+import 'package:despesas/components/chart.dart';
 import 'package:despesas/components/transaction_form.dart';
 import 'package:despesas/components/transaction_list.dart';
 import 'package:despesas/models/trasaction.dart';
@@ -7,6 +8,7 @@ import 'package:intl/intl.dart';
 import 'dart:math';
 import 'components/transaction_form.dart';
 import 'models/trasaction.dart';
+import 'components/chart.dart';
 
 main() => runApp(ExpensesApp());
 
@@ -53,19 +55,35 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   final List<Transaction> _trasctions = [
-    // Transaction(
-    //   id: 't1',
-    //   title: 'Novo tenis de corrida',
-    //   value: 310.76,
-    //   date: DateTime.now(),
-    // ),
-    // Transaction(
-    //   id: 't2',
-    //   title: 'Conta de luz',
-    //   value: 211.30,
-    //   date: DateTime.now(),
-    // ),
+    Transaction(
+      id: 't0',
+      title: 'Conta antiga',
+      value: 400.00,
+      date: DateTime.now().subtract(Duration(days: 33)),
+    ),
+    Transaction(
+      id: 't1',
+      title: 'Novo tenis de corrida',
+      value: 310.76,
+      date: DateTime.now().subtract(Duration(days: 3)),
+    ),
+    Transaction(
+      id: 't2',
+      title: 'Conta de luz',
+      value: 211.30,
+      date: DateTime.now().subtract(Duration(days: 3)),
+    ),
   ];
+
+  List<Transaction> get _recentTrasactions {
+    return _trasctions.where((tr) {
+      return tr.date.isAfter(
+        DateTime.now().subtract(
+          Duration(days: 7),
+        ),
+      );
+    }).toList();
+  }
 
   _addTransaction(String title, double value) {
     final newTransactions = Transaction(
@@ -107,14 +125,7 @@ class _MyHomePageState extends State<MyHomePage> {
           // mainAxisAlignment: MainAxisAlignment.spaceAround,
           // crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
-            Container(
-              width: double.infinity,
-              child: Card(
-                color: Colors.blue,
-                child: Text('Grafico'),
-                elevation: 5,
-              ),
-            ),
+            Chart(_recentTrasactions),
             TransactionList(_trasctions),
           ],
         ),
