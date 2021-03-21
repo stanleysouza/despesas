@@ -39,6 +39,7 @@ class TransactionList extends StatelessWidget {
                   child: Row(
                     children: <Widget>[
                       Container(
+                        width: 100,
                         margin: EdgeInsets.symmetric(
                           horizontal: 15,
                           vertical: 10,
@@ -50,12 +51,14 @@ class TransactionList extends StatelessWidget {
                             // ),
                             ),
                         padding: EdgeInsets.all(10),
-                        child: Text(
-                          'R\$ ${tr.value.toStringAsFixed(2)}',
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: 20,
-                            color: Theme.of(context).primaryColor,
+                        child: FittedBox(
+                          child: Text(
+                            'R\$ ${tr.value.toStringAsFixed(2)}',
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 20,
+                              color: Theme.of(context).primaryColor,
+                            ),
                           ),
                         ),
                       ),

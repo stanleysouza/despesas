@@ -59,13 +59,13 @@ class _MyHomePageState extends State<MyHomePage> {
       id: 't0',
       title: 'Conta antiga',
       value: 400.00,
-      date: DateTime.now().subtract(Duration(days: 33)),
+      date: DateTime.now().subtract(Duration(days: 1)),
     ),
     Transaction(
       id: 't1',
       title: 'Novo tenis de corrida',
       value: 310.76,
-      date: DateTime.now().subtract(Duration(days: 3)),
+      date: DateTime.now().subtract(Duration(days: 2)),
     ),
     Transaction(
       id: 't2',
