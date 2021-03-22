@@ -5,8 +5,9 @@ import 'package:intl/intl.dart';
 
 class TransactionList extends StatelessWidget {
   final List<Transaction> transactions;
+  final void Function(String) onRemove;
 
-  TransactionList(this.transactions);
+  TransactionList(this.transactions, this.onRemove);
 
   @override
   Widget build(BuildContext context) {
@@ -43,6 +44,7 @@ class TransactionList extends StatelessWidget {
                   ),
                   child: ListTile(
                     leading: Container(
+                      width: 80,
                       child: Padding(
                         padding: const EdgeInsets.symmetric(
                           horizontal: 1,
@@ -50,7 +52,7 @@ class TransactionList extends StatelessWidget {
                         ),
                         child: FittedBox(
                           child: Text(
-                            'R\$${tr.value}',
+                            'R\$${tr.value.toStringAsFixed(2)}',
                             style: Theme.of(context).textTheme.bodyText1,
                           ),
                         ),
@@ -61,9 +63,13 @@ class TransactionList extends StatelessWidget {
                       style: Theme.of(context).textTheme.subtitle1,
                     ),
                     subtitle: Text(
-                      DateFormat('d mm y').format(tr.date),
+                      DateFormat('dd/MM/y').format(tr.date),
                     ),
-                    trailing: Text('excluir'),
+                    trailing: IconButton(
+                      icon: Icon(Icons.delete),
+                      color: Theme.of(context).errorColor,
+                      onPressed: () => onRemove(tr.id),
+                    ),
                   ),
                 );
               },

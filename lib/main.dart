@@ -34,6 +34,15 @@ class ExpensesApp extends StatelessWidget {
                 fontSize: 13,
                 fontWeight: FontWeight.bold,
               ),
+              subtitle2: TextStyle(
+                fontFamily: 'Pangolin',
+                fontSize: 13,
+                // fontWeight: FontWeight.bold,
+              ),
+              button: TextStyle(
+                fontFamily: 'Pangolin',
+                color: Colors.white,
+              ),
             ),
         appBarTheme: AppBarTheme(
           textTheme: ThemeData.light().textTheme.copyWith(
@@ -55,26 +64,7 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  final List<Transaction> _trasctions = [
-    Transaction(
-      id: 't0',
-      title: 'Conta antiga',
-      value: 400.00,
-      date: DateTime.now().subtract(Duration(days: 1)),
-    ),
-    Transaction(
-      id: 't1',
-      title: 'Novo tenis de corrida',
-      value: 310.76,
-      date: DateTime.now().subtract(Duration(days: 2)),
-    ),
-    Transaction(
-      id: 't2',
-      title: 'Conta de luz',
-      value: 211.30,
-      date: DateTime.now().subtract(Duration(days: 3)),
-    ),
-  ];
+  final List<Transaction> _trasctions = [];
 
   List<Transaction> get _recentTrasactions {
     return _trasctions.where((tr) {
@@ -86,18 +76,26 @@ class _MyHomePageState extends State<MyHomePage> {
     }).toList();
   }
 
-  _addTransaction(String title, double value) {
+  _addTransaction(String title, double value, DateTime date) {
     final newTransactions = Transaction(
       id: Random().nextDouble().toString(),
       title: title,
       value: value,
-      date: DateTime.now(),
+      date: date,
     );
     setState(() {
       _trasctions.add(newTransactions);
     });
 
     Navigator.of(context).pop();
+  }
+
+  _deleteTransaction(String id) {
+    setState(() {
+      _trasctions.removeWhere((tr) {
+        return tr.id == id;
+      });
+    });
   }
 
   _openTransactionFormModal(BuildContext context) {
@@ -127,7 +125,7 @@ class _MyHomePageState extends State<MyHomePage> {
           // crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
             Chart(_recentTrasactions),
-            TransactionList(_trasctions),
+            TransactionList(_trasctions, _deleteTransaction),
           ],
         ),
       ),
